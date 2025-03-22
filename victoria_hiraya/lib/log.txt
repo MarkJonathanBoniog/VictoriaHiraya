@@ -1,0 +1,19 @@
+February 22, 2025
+0.0.0 - Initial UI of the game, initial concepts made
+February 25, 2025
+0.0.1 - Complete rework of current UI to make it developer-friendly
+0.0.2 - Implemented FlameGame
+0.0.3 - Added Initial map for trial
+0.0.4 - added two basic units (warrior and soldier)
+February 26, 2025
+0.0.5 - added animation to units
+0.0.6 - added movement animation to warrior
+0.0.7 - reworked the code structure, created unitutil, unit, unitmodel, gameutil
+0.0.8 - unit initial variables made, but needs more
+February 28,2025
+0.0.9 - remodled the folders and made a tons of classes to separate initializations and logics
+0.0.10 - created the command folder for commands
+0.0.11 - fixed the the soldier and warrior animations
+
+Future Development
+//have to move the refreshPanels in game_proper inside the endtrun in game_manager class
