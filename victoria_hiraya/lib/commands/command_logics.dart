@@ -50,6 +50,33 @@ class CommandLogics {
     }
   }
 
+  static Future<void> checkRangeAttack(
+    String faction,
+    Images images,
+    Unit unit,
+    Vector2 targetPosition,
+    Vector2 unitRelativePosition,
+    MapSetter map,
+  ) async {
+    print(
+        "Unit ${unit.unitType.name} is at ${unit.position.x} x ${unit.position.y}");
+    Unit? enemyUnit =
+        UnitModel().getEnemyAtPosition(unitRelativePosition, faction);
+    print((enemyUnit != null)
+        ? "encountered enemy unit ${enemyUnit.unitType.name}"
+        : "");
+    if (enemyUnit != null) {
+      UnitUtilities.changeUnitState(unit, images, "active");
+      UnitUtilities.changeUnitState(enemyUnit, images, "despawn");
+
+      await Future.delayed(Duration(milliseconds: 500), () {
+        enemyUnit.unitSprite.removeFromParent();
+        UnitModel().unitList.remove(enemyUnit);
+        print("Enemy unit removed from play.");
+      });
+    }
+  }
+
   static Future<void> moveUnit(
     Unit unit,
     Vector2 targetPosition,

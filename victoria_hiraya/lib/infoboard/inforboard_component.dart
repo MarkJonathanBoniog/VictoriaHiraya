@@ -35,8 +35,9 @@ class GameInfoBoardComponent extends PositionComponent {
       anchor: Anchor.topLeft,
       textRenderer: TextPaint(
         style: flutter.TextStyle(
+          fontFamily: "Norse",
           color: flutter.Colors.black,
-          fontSize: 14,
+          fontSize: 18,
           fontWeight: flutter.FontWeight.bold,
         ),
       ),
@@ -48,8 +49,10 @@ class GameInfoBoardComponent extends PositionComponent {
       anchor: Anchor.topLeft,
       textRenderer: TextPaint(
         style: flutter.TextStyle(
-          fontSize: 12,
+          fontFamily: "Norse",
+          fontSize: 14,
           color: flutter.Colors.black,
+          fontWeight: flutter.FontWeight.bold,
         ),
       ),
       boxConfig: TextBoxConfig(
@@ -65,11 +68,6 @@ class GameInfoBoardComponent extends PositionComponent {
   }
 
   void updateInfo(String imagePath, String title, String subtitle) async {
-    print("🛠 updateInfo() called with:");
-    print("   ➤ imagePath: $imagePath");
-    print("   ➤ title: $title");
-    print("   ➤ subtitle: $subtitle");
-
     iconComponent.sprite = await Sprite.load(imagePath);
     titleComponent.text = title;
     subtitleComponent.text = subtitle;

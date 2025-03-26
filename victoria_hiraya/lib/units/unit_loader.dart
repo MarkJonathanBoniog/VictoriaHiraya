@@ -58,7 +58,7 @@ class UnitLoader {
       images,
       UnitTypes().getFUnits[0].unitCode,
       UnitTypes().getFUnits[0].animationSheets[0],
-      Vector2(32, 32),
+      GameUtilities.spriteSize(),
       gridPosition,
     );
   }
@@ -73,6 +73,126 @@ class UnitLoader {
       images,
       UnitTypes().getSUnits[0].unitCode,
       UnitTypes().getSUnits[0].animationSheets[0],
+      GameUtilities.spriteSize(),
+      gridPosition,
+    );
+  }
+
+  static Future<SpriteAnimationComponent> loadKampilan(
+    MapSetter map,
+    Images images,
+    Vector2 gridPosition,
+  ) {
+    return loadUnit(
+      map,
+      images,
+      UnitTypes().getFUnits[1].unitCode,
+      UnitTypes().getFUnits[1].animationSheets[0],
+      GameUtilities.spriteSize(),
+      gridPosition,
+    );
+  }
+
+  static Future<SpriteAnimationComponent> loadConquistador(
+    MapSetter map,
+    Images images,
+    Vector2 gridPosition,
+  ) {
+    return loadUnit(
+      map,
+      images,
+      UnitTypes().getSUnits[1].unitCode,
+      UnitTypes().getSUnits[1].animationSheets[0],
+      GameUtilities.spriteSize(),
+      gridPosition,
+    );
+  }
+
+  static Future<SpriteAnimationComponent> loadBabaylan(
+    MapSetter map,
+    Images images,
+    Vector2 gridPosition,
+  ) {
+    return loadUnit(
+      map,
+      images,
+      UnitTypes().getFUnits[2].unitCode,
+      UnitTypes().getFUnits[2].animationSheets[0],
+      GameUtilities.spriteSize(),
+      gridPosition,
+    );
+  }
+
+  static Future<SpriteAnimationComponent> loadMisionero(
+    MapSetter map,
+    Images images,
+    Vector2 gridPosition,
+  ) {
+    return loadUnit(
+      map,
+      images,
+      UnitTypes().getSUnits[2].unitCode,
+      UnitTypes().getSUnits[2].animationSheets[0],
+      GameUtilities.spriteSize(),
+      gridPosition,
+    );
+  }
+
+  static Future<SpriteAnimationComponent> loadBagani(
+    MapSetter map,
+    Images images,
+    Vector2 gridPosition,
+  ) {
+    return loadUnit(
+      map,
+      images,
+      UnitTypes().getFUnits[3].unitCode,
+      UnitTypes().getFUnits[3].animationSheets[0],
+      GameUtilities.spriteSize(),
+      gridPosition,
+    );
+  }
+
+  static Future<SpriteAnimationComponent> loadCapitan(
+    MapSetter map,
+    Images images,
+    Vector2 gridPosition,
+  ) {
+    return loadUnit(
+      map,
+      images,
+      UnitTypes().getSUnits[3].unitCode,
+      UnitTypes().getSUnits[3].animationSheets[0],
+      GameUtilities.spriteSize(),
+      gridPosition,
+    );
+  }
+
+  static Future<SpriteAnimationComponent> loadDatu(
+    MapSetter map,
+    Images images,
+    Vector2 gridPosition,
+  ) {
+    return loadUnit(
+      map,
+      images,
+      UnitTypes().getFUnits[4].unitCode,
+      UnitTypes().getFUnits[4].animationSheets[0],
+      GameUtilities.spriteSize(),
+      gridPosition,
+    );
+  }
+
+  static Future<SpriteAnimationComponent> loadGobernadorcillo(
+    MapSetter map,
+    Images images,
+    Vector2 gridPosition,
+  ) {
+    return loadUnit(
+      map,
+      images,
+      UnitTypes().getSUnits[4].unitCode,
+      UnitTypes().getSUnits[4].animationSheets[0],
       GameUtilities.spriteSize(),
       gridPosition,
     );

@@ -77,7 +77,8 @@ class PlayerInfoComponent extends PositionComponent {
       text: "$name",
       textRenderer: TextPaint(
         style: const TextStyle(
-          fontSize: 18,
+          fontFamily: "Norse",
+          fontSize: 20,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
@@ -111,8 +112,9 @@ class ScoreMarkerComponent extends PositionComponent {
       anchor: Anchor.center,
       textRenderer: TextPaint(
         style: TextStyle(
+          fontFamily: "Norse",
           color: Colors.white,
-          fontSize: 18,
+          fontSize: 28,
           fontWeight: FontWeight.bold,
         ),
       ),

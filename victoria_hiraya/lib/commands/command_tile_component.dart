@@ -47,40 +47,44 @@ class CommandTileComponent extends PositionComponent with TapCallbacks {
 
     textComponent = TextComponent(
       text: text,
-      position: Vector2(50, size.y / 2 - 8),
+      position: Vector2(50, size.y / 2 - 10),
       anchor: Anchor.topLeft,
       textRenderer: TextPaint(
         style: const TextStyle(
+          fontFamily: "Norse",
           color: Colors.black,
-          fontSize: 16,
+          fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
       ),
     );
     add(textComponent);
 
-    countCircle = CircleComponent(
-      radius: 12,
-      position: Vector2(size.x - 36, size.y / 2 - 12),
-      paint: Paint()
-        ..color = Colors.white
-        ..style = PaintingStyle.fill,
-    );
-    add(countCircle);
+    if (text != "Maghayo" && text != "Avanzar") {
+      countCircle = CircleComponent(
+        radius: 12,
+        position: Vector2(size.x - 36, size.y / 2 - 12),
+        paint: Paint()
+          ..color = Colors.white
+          ..style = PaintingStyle.fill,
+      );
+      add(countCircle);
 
-    countComponent = TextComponent(
-      text: count.toString(),
-      position: countCircle.position + Vector2(8, 4),
-      anchor: Anchor.topLeft,
-      textRenderer: TextPaint(
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
+      countComponent = TextComponent(
+        text: count.toString(),
+        position: countCircle.position + Vector2(9, 2),
+        anchor: Anchor.topLeft,
+        textRenderer: TextPaint(
+          style: const TextStyle(
+            fontFamily: "Norse",
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-    );
-    add(countComponent);
+      );
+      add(countComponent);
+    }
   }
 
   @override

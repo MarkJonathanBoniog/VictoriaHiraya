@@ -27,7 +27,7 @@ class CommandList {
       temp.use();
       print(
           "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
-      GameManager.nextTurn();
+      await GameManager.nextTurn();
     },
     "basicMoveSpanish": (
       Images images,
@@ -47,7 +47,7 @@ class CommandList {
       temp.use();
       print(
           "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
-      GameManager.nextTurn();
+      await GameManager.nextTurn();
     },
     "spawnMarangal": (
       MapSetter map,
@@ -72,7 +72,7 @@ class CommandList {
       temp.use();
       print(
           "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
-      GameManager.nextTurn();
+      await GameManager.nextTurn();
     },
     "spawnSoldados": (
       MapSetter map,
@@ -98,7 +98,211 @@ class CommandList {
       temp.use();
       print(
           "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
-      GameManager.nextTurn();
+      await GameManager.nextTurn();
+    },
+    "spawnKampilan": (
+      MapSetter map,
+      Images images,
+      Vector2 position,
+    ) async {
+      UnitModel().addUnit(
+        Unit(
+          unitType: UnitTypes().getFUnits[1],
+          position: position,
+          unitSprite: await UnitLoader.loadKampilan(
+            map,
+            images,
+            position,
+          ),
+        ),
+      );
+      var commandModel = CommandModel();
+      var temp = commandModel.fCommands()["spawnKampilan"];
+      print(
+          "Before use: ${temp!.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      temp.use();
+      print(
+          "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      await GameManager.nextTurn();
+    },
+    "spawnConquistador": (
+      MapSetter map,
+      Images images,
+      Vector2 position,
+    ) async {
+      print("spawn soldadis from list called");
+      UnitModel().addUnit(
+        Unit(
+          unitType: UnitTypes().getSUnits[1],
+          position: position,
+          unitSprite: await UnitLoader.loadConquistador(
+            map,
+            images,
+            position,
+          ),
+        ),
+      );
+      var commandModel = CommandModel();
+      var temp = commandModel.sCommands()["spawnConquistador"];
+      print(
+          "Before use: ${temp!.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      temp.use();
+      print(
+          "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      await GameManager.nextTurn();
+    },
+    "spawnBabaylan": (
+      MapSetter map,
+      Images images,
+      Vector2 position,
+    ) async {
+      UnitModel().addUnit(
+        Unit(
+          unitType: UnitTypes().getFUnits[2],
+          position: position,
+          unitSprite: await UnitLoader.loadBabaylan(
+            map,
+            images,
+            position,
+          ),
+        ),
+      );
+      var commandModel = CommandModel();
+      var temp = commandModel.fCommands()["spawnBabaylan"];
+      print(
+          "Before use: ${temp!.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      temp.use();
+      print(
+          "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      await GameManager.nextTurn();
+    },
+    "spawnMisionero": (
+      MapSetter map,
+      Images images,
+      Vector2 position,
+    ) async {
+      print("spawn soldadis from list called");
+      UnitModel().addUnit(
+        Unit(
+          unitType: UnitTypes().getSUnits[2],
+          position: position,
+          unitSprite: await UnitLoader.loadMisionero(
+            map,
+            images,
+            position,
+          ),
+        ),
+      );
+      var commandModel = CommandModel();
+      var temp = commandModel.sCommands()["spawnMisionero"];
+      print(
+          "Before use: ${temp!.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      temp.use();
+      print(
+          "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      await GameManager.nextTurn();
+    },
+    "spawnBagani": (
+      MapSetter map,
+      Images images,
+      Vector2 position,
+    ) async {
+      UnitModel().addUnit(
+        Unit(
+          unitType: UnitTypes().getFUnits[3],
+          position: position,
+          unitSprite: await UnitLoader.loadBagani(
+            map,
+            images,
+            position,
+          ),
+        ),
+      );
+      var commandModel = CommandModel();
+      var temp = commandModel.fCommands()["spawnBagani"];
+      print(
+          "Before use: ${temp!.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      temp.use();
+      print(
+          "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      await GameManager.nextTurn();
+    },
+    "spawnCapitan": (
+      MapSetter map,
+      Images images,
+      Vector2 position,
+    ) async {
+      print("spawn soldadis from list called");
+      UnitModel().addUnit(
+        Unit(
+          unitType: UnitTypes().getSUnits[3],
+          position: position,
+          unitSprite: await UnitLoader.loadCapitan(
+            map,
+            images,
+            position,
+          ),
+        ),
+      );
+      var commandModel = CommandModel();
+      var temp = commandModel.sCommands()["spawnCapitan"];
+      print(
+          "Before use: ${temp!.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      temp.use();
+      print(
+          "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      await GameManager.nextTurn();
+    },
+    "spawnDatu": (
+      MapSetter map,
+      Images images,
+      Vector2 position,
+    ) async {
+      UnitModel().addUnit(
+        Unit(
+          unitType: UnitTypes().getFUnits[4],
+          position: position,
+          unitSprite: await UnitLoader.loadDatu(
+            map,
+            images,
+            position,
+          ),
+        ),
+      );
+      var commandModel = CommandModel();
+      var temp = commandModel.fCommands()["spawnDatu"];
+      print(
+          "Before use: ${temp!.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      temp.use();
+      print(
+          "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      await GameManager.nextTurn();
+    },
+    "spawnGobernadorcillo": (
+      MapSetter map,
+      Images images,
+      Vector2 position,
+    ) async {
+      print("spawn soldadis from list called");
+      UnitModel().addUnit(
+        Unit(
+          unitType: UnitTypes().getSUnits[4],
+          position: position,
+          unitSprite: await UnitLoader.loadGobernadorcillo(
+            map,
+            images,
+            position,
+          ),
+        ),
+      );
+      var commandModel = CommandModel();
+      var temp = commandModel.sCommands()["spawnGobernadorcillo"];
+      print(
+          "Before use: ${temp!.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      temp.use();
+      print(
+          "After use: ${temp.name} count = ${temp.count}, Instance = ${temp.hashCode}");
+      await GameManager.nextTurn();
     },
   };
 }

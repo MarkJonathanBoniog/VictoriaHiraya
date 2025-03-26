@@ -12,7 +12,7 @@ class CommandModel {
   late Images images;
 
   CommandModel._internal() {
-    _initializeCommands(); // Initialize commands once
+    initializeCommands(); // Initialize commands once
   }
 
   void initialize(Images images, MapSetter map) {
@@ -20,15 +20,14 @@ class CommandModel {
     this.map = map;
   }
 
-  // Store commands persistently
   final Map<String, Command> _fCommands = {};
   final Map<String, Command> _sCommands = {};
 
-  void _initializeCommands() {
+  void initializeCommands() {
     _fCommands.addAll({
       "basicMoveFilipino": Command(
         name: "Maghayo",
-        desc: "desc goes here",
+        desc: "Command all units to move forward.",
         flavor: "flavor text",
         photo: "../icons/basicMovement.png",
         count: 0,
@@ -47,8 +46,66 @@ class CommandModel {
         count: 3,
         function: () {
           print("toggling to Filipino spawn");
-          SpawnManager.toggleSpawnModeFilipino(map);
+          if (!SpawnManager.isSpawnModeFilipino) {
+            SpawnManager.toggleSpawnModeFilipino(map);
+          }
           SpawnManager.generateSpawnerCode("spawnMarangal");
+        },
+      ),
+      "spawnKampilan": Command(
+        name: "Magsaklaw",
+        desc: "Spawn a cavalry warrior \"Sibatana\" on your baseline.",
+        flavor: "flavor text",
+        photo: "../icons/spawnCavalry.png",
+        count: 1,
+        function: () {
+          print("toggling to Filipino spawn");
+          if (!SpawnManager.isSpawnModeFilipino) {
+            SpawnManager.toggleSpawnModeFilipino(map);
+          }
+          SpawnManager.generateSpawnerCode("spawnKampilan");
+        },
+      ),
+      "spawnBabaylan": Command(
+        name: "Bantay-Lahi",
+        desc: "Spawn a faith unit \"Babaylan\" on your baseline.",
+        flavor: "flavor text",
+        photo: "../icons/spawnWatcher.png",
+        count: 0,
+        function: () {
+          print("toggling to Filipino spawn");
+          if (!SpawnManager.isSpawnModeFilipino) {
+            SpawnManager.toggleSpawnModeFilipino(map);
+          }
+          SpawnManager.generateSpawnerCode("spawnBabaylan");
+        },
+      ),
+      "spawnBagani": Command(
+        name: "Sanduguan",
+        desc: "Spawn a strong warrior \"Bagani\" on your baseline.",
+        flavor: "flavor text",
+        photo: "../icons/spawnRhetoric.png",
+        count: 0,
+        function: () {
+          print("toggling to Filipino spawn");
+          if (!SpawnManager.isSpawnModeFilipino) {
+            SpawnManager.toggleSpawnModeFilipino(map);
+          }
+          SpawnManager.generateSpawnerCode("spawnBagani");
+        },
+      ),
+      "spawnDatu": Command(
+        name: "Hiraya",
+        desc: "Spawn a leading unit \"Datu\" on your baseline.",
+        flavor: "flavor text",
+        photo: "../icons/spawnGuardian.png",
+        count: 0,
+        function: () {
+          print("toggling to Filipino spawn");
+          if (!SpawnManager.isSpawnModeFilipino) {
+            SpawnManager.toggleSpawnModeFilipino(map);
+          }
+          SpawnManager.generateSpawnerCode("spawnDatu");
         },
       ),
     });
@@ -56,7 +113,7 @@ class CommandModel {
     _sCommands.addAll({
       "basicMoveSpanish": Command(
         name: "Avanzar",
-        desc: "desc goes here",
+        desc: "Command all units to move forward.",
         flavor: "flavor text",
         photo: "../icons/basicMovement.png",
         count: 0,
@@ -75,8 +132,66 @@ class CommandModel {
         count: 3,
         function: () {
           print("toggling to Spanish spawn");
-          SpawnManager.toggleSpawnModeSpanish(map);
+          if (!SpawnManager.isSpawnModeSpanish) {
+            SpawnManager.toggleSpawnModeSpanish(map);
+          }
           SpawnManager.generateSpawnerCode("spawnSoldados");
+        },
+      ),
+      "spawnConquistador": Command(
+        name: "Jinetear",
+        desc: "Spawn a cavalry warrior \"Conquistador\" on your baseline.",
+        flavor: "flavor text",
+        photo: "../icons/spawnCavalry.png",
+        count: 1,
+        function: () {
+          print("toggling to Spanish spawn");
+          if (!SpawnManager.isSpawnModeSpanish) {
+            SpawnManager.toggleSpawnModeSpanish(map);
+          }
+          SpawnManager.generateSpawnerCode("spawnConquistador");
+        },
+      ),
+      "spawnMisionero": Command(
+        name: "Oraculo",
+        desc: "Spawn a faith unit \"Misionero\" on your baseline.",
+        flavor: "flavor text",
+        photo: "../icons/spawnWatcher.png",
+        count: 0,
+        function: () {
+          print("toggling to Spanish spawn");
+          if (!SpawnManager.isSpawnModeSpanish) {
+            SpawnManager.toggleSpawnModeSpanish(map);
+          }
+          SpawnManager.generateSpawnerCode("spawnMisionero");
+        },
+      ),
+      "spawnCapitan": Command(
+        name: "Sangre",
+        desc: "Spawn a strong warrior \"Capitan\" on your baseline.",
+        flavor: "flavor text",
+        photo: "../icons/spawnRhetoric.png",
+        count: 0,
+        function: () {
+          print("toggling to Spanish spawn");
+          if (!SpawnManager.isSpawnModeSpanish) {
+            SpawnManager.toggleSpawnModeSpanish(map);
+          }
+          SpawnManager.generateSpawnerCode("spawnCapitan");
+        },
+      ),
+      "spawnGobernadorcillo": Command(
+        name: "Victoria",
+        desc: "Spawn a leading unit \"Gobernadorcillo\" on your baseline.",
+        flavor: "flavor text",
+        photo: "../icons/spawnGuardian.png",
+        count: 0,
+        function: () {
+          print("toggling to Spanish spawn");
+          if (!SpawnManager.isSpawnModeSpanish) {
+            SpawnManager.toggleSpawnModeSpanish(map);
+          }
+          SpawnManager.generateSpawnerCode("spawnGobernadorcillo");
         },
       ),
     });

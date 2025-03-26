@@ -33,8 +33,9 @@ class MenuBarComponent extends PositionComponent {
       position: Vector2((size.x / 2) - 30, 18),
       textRenderer: TextPaint(
         style: TextStyle(
+          fontFamily: "Norse",
           color: Colors.white,
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -56,8 +57,9 @@ class MenuBarComponent extends PositionComponent {
       position: Vector2((size.x / 2) + 30, 18),
       textRenderer: TextPaint(
         style: TextStyle(
+          fontFamily: "Norse",
           color: Colors.white,
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
       ),

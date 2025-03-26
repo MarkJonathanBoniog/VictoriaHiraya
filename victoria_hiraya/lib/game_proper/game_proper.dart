@@ -2,22 +2,52 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:victoria_hiraya/commands/command_model.dart';
 import 'package:victoria_hiraya/commands/command_panel_component.dart';
+import 'package:victoria_hiraya/game_proper/game_menu.dart';
 import 'package:victoria_hiraya/infoboard/inforboard_component.dart';
 import 'package:victoria_hiraya/maps/map_constants.dart';
 import 'package:victoria_hiraya/maps/map_setter.dart';
 import 'package:victoria_hiraya/player/player_info_component.dart';
 import 'package:victoria_hiraya/utilities/game_manager.dart';
+import 'package:victoria_hiraya/utilities/game_menu_overlay.dart';
 import 'package:victoria_hiraya/utilities/game_over_component.dart';
 import 'package:victoria_hiraya/utilities/menu_bar_component.dart';
 
-class VictoriaHiraya extends StatelessWidget {
+class VictoriaHiraya extends StatefulWidget {
   const VictoriaHiraya({super.key});
 
   @override
+  State<VictoriaHiraya> createState() => _VictoriaHirayaState();
+}
+
+class _VictoriaHirayaState extends State<VictoriaHiraya> {
+  late AudioPlayer player;
+
+  void initPlayer() async {
+    player = AudioPlayer();
+
+    await player.setAsset("assets/audios/start_battle.mp3");
+    player.play();
+
+    await player.playerStateStream.firstWhere(
+        (state) => state.processingState == ProcessingState.completed);
+
+    await player.setAsset("assets/audios/mid_battle.mp3");
+    player.setLoopMode(LoopMode.one);
+    player.play();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initPlayer();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final myGame = MyGame();
+    final myGame = MyGame(context, player);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -30,6 +60,10 @@ class VictoriaHiraya extends StatelessWidget {
 }
 
 class MyGame extends FlameGame {
+  final BuildContext context;
+  final AudioPlayer player;
+  MyGame(this.context, this.player);
+
   late CommandPanelComponent filipinoPanel;
   late CommandPanelComponent spanishPanel;
   late PlayerInfoComponent filipinoPlayerInfo;
@@ -45,6 +79,8 @@ class MyGame extends FlameGame {
   late Sprite filipinoWinBg;
   late Sprite victoriaHirayaBg;
   late Sprite finishButtonSprite;
+  bool isMenuOpen = false;
+  GameMenuOverlay? menuOverlay;
 
   @override
   Future<void> onLoad() async {
@@ -65,16 +101,39 @@ class MyGame extends FlameGame {
     String scorePath = "../backgrounds/score_bg.png";
     scoreBgSprite = await Sprite.load(scorePath);
 
-    final flagSpanishSprite =
-        await Sprite.load("../backgrounds/spanish_flag.png");
     final menuButton = SpriteButtonComponent(
       button: menuSprite,
       position: Vector2((size.x / 2), 2),
       size: Vector2(32, 32),
       priority: 3,
       anchor: Anchor.topCenter,
-      onPressed: () {
-        // showMenu();
+      onPressed: () async {
+        if (!isMenuOpen) {
+          menuOverlay = GameMenuOverlay(
+            size,
+            await Sprite.load("../backgrounds/player_panel_bg.png"),
+            await Sprite.load("../backgrounds/command_tile_bg.png"),
+            await Sprite.load("../backgrounds/command_tile_bg.png"),
+            onClose: () {
+              remove(menuOverlay!);
+              isMenuOpen = false;
+            },
+            onAbandon: () {
+              print("Abandoning campaign...");
+              player.stop();
+              remove(menuOverlay!);
+              isMenuOpen = false;
+              GameManager.reset();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (_) => GameMenu(),
+                ),
+              );
+            },
+          );
+          add(menuOverlay!);
+          isMenuOpen = true;
+        }
       },
     );
 
@@ -124,14 +183,17 @@ class MyGame extends FlameGame {
       size: Vector2(254, 279),
       position: Vector2(10, 84),
       priority: -1,
+      paint: Paint()..color = Colors.white.withOpacity(0.75),
     );
     add(flagFBG);
-
+    final flagSpanishSprite =
+        await Sprite.load("../backgrounds/spanish_flag.png");
     final flagSBG = SpriteComponent(
       sprite: flagSpanishSprite,
       size: Vector2(252, 279),
       position: Vector2(size.x - 262, 84),
       priority: -1,
+      paint: Paint()..color = Colors.white.withOpacity(0.75),
     );
     add(flagSBG);
 
@@ -142,7 +204,6 @@ class MyGame extends FlameGame {
   @override
   void update(double dt) {
     super.update(dt);
-    updatePanelPriority();
   }
 
   void setupPlayerInfo() {
@@ -224,6 +285,8 @@ class MyGame extends FlameGame {
 
     setupPanels();
     setupPlayerInfo();
+
+    updatePanelPriority();
   }
 
   void updatePanelPriority() {
@@ -251,16 +314,18 @@ class MyGame extends FlameGame {
 
   String determineWinner() {
     if (GameManager.filipinoTiles > GameManager.spanishTiles) {
-      return "Defeat! The Filipinos drove away the Spaniards.";
+      return "filipino";
     } else if (GameManager.spanishTiles > GameManager.filipinoTiles) {
-      return "Defeat! The Spanish triumphed over Filipinos.";
+      return "spanish";
     } else {
-      return "Victory! Both sides achieved Victoria Hiraya.";
+      return "hiraya";
     }
   }
 
   void showGameOverBanner(String winnerType) {
     if (gameOverBanner != null) return;
+
+    player.stop();
 
     Sprite backgroundSprite = winnerType == "spanish"
         ? spanishWinBg
@@ -269,7 +334,14 @@ class MyGame extends FlameGame {
             : victoriaHirayaBg;
 
     gameOverBanner = GameOverComponent(
-        winnerType, size, backgroundSprite, finishButtonSprite);
+      winnerType,
+      size,
+      backgroundSprite,
+      finishButtonSprite,
+      context,
+      player,
+    );
+
     add(gameOverBanner!);
   }
 }

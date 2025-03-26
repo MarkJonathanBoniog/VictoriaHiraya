@@ -32,13 +32,10 @@ dependencies:
   flame: ^1.25.0
   flutter:
     sdk: flutter
+  just_audio: ^0.9.46
+  realm: ^20.0.1
 
 dev_dependencies:
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
@@ -53,6 +50,8 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
+    # universal audio directory
+    - assets/audios/
     # universal image directory
     - assets/images/
     #images for command icons
@@ -70,8 +69,16 @@ flutter:
     # for unit animations
     # for filipino units
     - assets/animations/filipino/marangal/
+    - assets/animations/filipino/kampilan/
+    - assets/animations/filipino/babaylan/
+    - assets/animations/filipino/bagani/
+    - assets/animations/filipino/datu/
     # for spanish units
     - assets/animations/spanish/soldados/
+    - assets/animations/spanish/conquistador/
+    - assets/animations/spanish/misionero/
+    - assets/animations/spanish/capitan/
+    - assets/animations/spanish/gobernadorcillo/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
@@ -81,17 +88,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: Norse
+      fonts:
+        - asset: assets/fonts/norse_normal.otf
+          weight: 400
+        - asset: assets/fonts/norse_bold.otf
+          weight: 700
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
